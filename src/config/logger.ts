@@ -2,6 +2,7 @@ import pino from "pino";
 import { Env } from "./env";
 
 export const BaseLogger = pino({
+    enabled: Env.isTest ? false : true,
     level: Env.isProd ? "info" : "debug",
     base: {
         env: Env.Environment

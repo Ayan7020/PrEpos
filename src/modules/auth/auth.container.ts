@@ -1,11 +1,9 @@
 import { container, type DependencyContainer } from "tsyringe";
 
 import { AuthPrismaRepository } from "./auth.repository";
+import { TOKENS } from "@/config";
 
-export const TOKENS = {
-    AuthRepository: Symbol("AuthRepository"),
-    AuthService: Symbol("AuthService"),
-};
+
 
 export function registerAuthModule(container: DependencyContainer) {
     container.register(TOKENS.AuthRepository, {

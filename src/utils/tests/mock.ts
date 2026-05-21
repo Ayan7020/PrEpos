@@ -23,3 +23,11 @@ export function mockMiddleware() {
         next,
     };
 }
+
+export function MockPrisma() {
+    return () => ({
+        prisma: {
+            $transaction: jest.fn(),
+        },
+    })
+}

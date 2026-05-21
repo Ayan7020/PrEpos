@@ -1,7 +1,6 @@
 import { Logger } from "pino";
 import { CreateUserDto, type IAuthRepo, IAuthService } from "./auth.type";
-import { BaseLogger } from "@/config"
-import { TOKENS } from "./auth.container";
+import { BaseLogger, TOKENS } from "@/config";
 import { inject, injectable } from "tsyringe";
 import { ConflictError } from "@/utils/errors";
 import { createHashing } from "./auth.utils";

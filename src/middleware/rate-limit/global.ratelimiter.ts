@@ -1,4 +1,4 @@
-import { App_settings } from "@/config";
+import { App_settings, BaseLogger } from "@/config";
 import { RedisClient } from "@/lib/redis";
 import { BaseError, TooManyRequestsError } from "@/utils/errors";
 import { NextFunction, Request, Response } from "express";
@@ -22,9 +22,9 @@ export const globalRateLimiterPerIp = async (req: Request, res: Response, next: 
         if (error instanceof RateLimiterRes) {
             throw new TooManyRequestsError();
         }
-
+        
+        BaseLogger.error(error)
         //  redis-down: still access the Application;
-        // BaseLogger.error(error)
         next();
     }
 }
