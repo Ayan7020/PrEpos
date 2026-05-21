@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "dotenv -e .env.test jest",
+    "test:watch": "dotenv -e .env.test jest --watch",
+    "test:coverage": "dotenv -e .env.test jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "@types/pg": "^8.20.0",
     "boxen": "^8.0.1",
     "chalk": "^5.6.2",
+    "dotenv-cli": "^11.0.0",
     "figlet": "^1.11.0",
     "prisma": "^7.8.0",
     "ts-jest": "^29.4.10",
@@ -31,9 +32,11 @@
     "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "ioredis": "^5.10.1",
     "jest": "^30.4.2",
     "pg": "^8.21.0",
     "pino": "^10.3.1",
+    "rate-limiter-flexible": "^11.1.0",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.10.0",
     "zod": "^4.4.3"

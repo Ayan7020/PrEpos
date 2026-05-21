@@ -1,4 +1,4 @@
-import { container } from "tsyringe";
+import { container, type DependencyContainer } from "tsyringe";
 
 import { AuthPrismaRepository } from "./auth.repository";
 
@@ -7,11 +7,8 @@ export const TOKENS = {
     AuthService: Symbol("AuthService"),
 };
 
-if (!container.isRegistered(TOKENS.AuthRepository)) {
-    container.register(
-        TOKENS.AuthRepository,
-        {
-            useClass: AuthPrismaRepository
-        }
-    );
+export function registerAuthModule(container: DependencyContainer) {
+    container.register(TOKENS.AuthRepository, {
+        useClass: AuthPrismaRepository
+    }); 
 }

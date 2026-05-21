@@ -8,6 +8,14 @@ export class BadRequestError extends BaseError {
     }
 }
 
+
+export class TooManyRequestsError extends BaseError {
+    constructor(
+        message = "Too many request!"
+    ) {
+        super(429, message);
+    }
+}
 export class UnauthorizedError extends BaseError {
     constructor(
         message = "Unauthorized"

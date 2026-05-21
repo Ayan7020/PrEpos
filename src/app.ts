@@ -1,7 +1,10 @@
 import Express from "express";
-import { GlobalError } from "./middleware";
+import { GlobalError, globalRateLimiterPerIp } from "./middleware";
 
 
 export const app = Express();
 
-app.use(GlobalError)
+
+app.use(globalRateLimiterPerIp);
+
+app.use(GlobalError);

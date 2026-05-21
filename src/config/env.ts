@@ -7,13 +7,19 @@ dotenv.config({
 
 const schema = z.object({
     PORT: z.string(),
-    Environment: z.enum(["development","production"]).default("development")
-}) 
+    Environment: z.enum(["development", "production", "testing"]).default("development"),
+
+    REDIS_HOST: z.string(),
+    REDIS_PORT: z.string(),
+    REDIS_PASSWORD: z.string()
+})
 
 const parsed = schema.parse(process.env);
 
 export const Env = {
     ...parsed,
+    REDIS_PORT: Number(parsed.REDIS_PORT),
     isProd: parsed.Environment === "production",
-    isDev: parsed.Environment === "development"
+    isDev: parsed.Environment === "development",
+    isTest: parsed.Environment === "testing"
 }

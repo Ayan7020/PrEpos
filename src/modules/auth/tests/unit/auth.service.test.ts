@@ -4,17 +4,6 @@ import { CreateUserDto, IAuthRepo, IAuthService } from "../../auth.type";
 import * as utils from "../../auth.utils";
 import { ConflictError } from "@/utils/errors";
 
-jest.mock("@/config", () => ({
-    BaseLogger: {
-        child: jest.fn().mockReturnValue({
-            info: jest.fn(),
-            error: jest.fn(),
-            warn: jest.fn(),
-            debug: jest.fn(),
-        }),
-    },
-}));
-
 jest.mock("../../auth.utils", () => ({
     createHashing: jest.fn(),
 }));
@@ -88,7 +77,7 @@ describe("AuthService", () => {
 
             it("should NOT call createUser if email exists", async () => {
                 (mockRepo.findByEmail as jest.Mock).mockResolvedValue(buildDto);
-                await service.CreateUser(buildDto()).catch(() => {});
+                await service.CreateUser(buildDto()).catch(() => { });
 
                 expect(mockRepo.createUser).not.toHaveBeenCalled();
             })
