@@ -18,7 +18,7 @@ export class AuthPrismaRepository implements IAuthRepo {
         const user_id = await prisma.$transaction(async (tx) => {
             const user = await tx.user.create({
                 data: {
-                    name: data.name,
+                    name: data.name, 
                     store_name: data.store_name,
                     email: data.email,
                     password_hash: data.password
