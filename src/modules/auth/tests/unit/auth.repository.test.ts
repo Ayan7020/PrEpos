@@ -46,7 +46,7 @@ describe('createUser', () => {
         const result = await repo.createUser(dto);
 
         expect(result).toEqual({ id: mock_user_id });
-
+        
         expect(mockTx.user.create).toHaveBeenCalledWith({
             data: {
                 name: dto.name,

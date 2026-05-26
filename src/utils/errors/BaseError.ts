@@ -2,12 +2,12 @@
 export class BaseError extends Error {
     public readonly statusCode: number
     public readonly isOperational: Boolean
-    public readonly data?: Record<string, unknown>
+    public readonly data?: unknown
 
     constructor(
         statusCode: number,
         message: string,
-        data?: Record<string, unknown>,
+        data?: unknown,
         isOperational: Boolean = true
     ) {
         super(message);

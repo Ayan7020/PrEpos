@@ -2,9 +2,10 @@ import { BaseError } from "./BaseError";
 
 export class BadRequestError extends BaseError {
     constructor(
-        message = "Bad Request"
+        message = "Bad Request",
+        data?: unknown
     ) {
-        super(400, message);
+        super(400, message, data);
     }
 }
 
@@ -44,6 +45,6 @@ export class InternalServerError extends BaseError {
     constructor(
         message = "Internal Server Error"
     ) {
-        super(500, message, undefined,false);
+        super(500, message, undefined, false);
     }
 }
