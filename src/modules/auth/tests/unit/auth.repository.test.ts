@@ -64,7 +64,25 @@ describe('createUser', () => {
         });
     });
 
-    it('should propagate error (and implicitly rollback) if user_OutBox.create fails', async () => {
+    it('should propagate error  if user_OutBox.create fails', async () => {
+        const mock_user_id = 'testing_user_id_1';
 
+        const dto = buildDto();
+
+        const mockTx = {
+            user: {
+                create: jest.fn().mockResolvedValue({ id: mock_user_id }),
+            },
+            user_OutBox: {
+                create: jest.fn().mockRejectedValue(new Error("OutBox creation failed")),
+            },
+        };
+
+        (prisma.$transaction as jest.Mock).mockImplementation(
+            (ct) => ct(mockTx)
+        );
+
+
+        await expect(repo.createUser(dto)).rejects.toThrow(Error("OutBox creation failed"));
     })
 });
