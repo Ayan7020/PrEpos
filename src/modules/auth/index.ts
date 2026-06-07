@@ -1,2 +1,2 @@
-export { default as authRouter } from "./auth.route";
-export * from "./auth.container"
+export { default as authRouter } from "./http/auth.routes";
+export * from "./di"

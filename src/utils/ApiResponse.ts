@@ -2,7 +2,7 @@ import { Response } from "express"
 
 export class ApiResponse {
     static success(res: Response,
-        data: Record<string, unknown>,
+        data: Object,
         message = "Success",
         statusCode = 200
     ) {

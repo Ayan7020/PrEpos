@@ -1,8 +1,8 @@
-import z from "zod/v3";
+import z from "zod";
 
 export const CreateUserSchema = z.object({
     name: z.string(),
     store_name: z.string(),
-    email: z.string().email(),
+    email: z.email(),
     password: z.string()
 });

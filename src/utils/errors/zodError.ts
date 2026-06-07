@@ -1,9 +1,9 @@
-import { ZodError } from "zod/v3";
+import { ZodError } from "zod";
 import { BadRequestError } from "./CustomError";
 
 
 export const handleZodError = (error: ZodError) => {
-    const formattedError = error.errors.map((err) => {
+    const formattedError = error.issues.map((err) => {
         return {
             field: err.path.join("."),
             message: err.message,

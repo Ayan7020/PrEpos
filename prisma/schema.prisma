@@ -21,8 +21,10 @@ model User {
   store_name    String
   password_hash String
 
-  created_at DateTime     @default(now())
-  updated_at DateTime     @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  is_active  Boolean      @default(true)
   userOutBox User_OutBox?
 }
 
