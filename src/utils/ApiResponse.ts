@@ -1,5 +1,11 @@
 import { Response } from "express"
 
+export interface ApiResponseType<T> {
+    success: boolean;
+    data: T;
+    message: string;
+}
+
 export class ApiResponse {
     static success(res: Response,
         data: Object,
@@ -11,6 +17,18 @@ export class ApiResponse {
             message,
             data: data
         });
+    }
+
+    static successResponse<T>( 
+        success = true,
+        message: string,
+        data: T
+    ) {
+        return {
+            success,
+            message,
+            data
+        }
     }
 
     static error(res: Response,

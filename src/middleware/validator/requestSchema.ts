@@ -8,7 +8,7 @@ export const requestSchemaValidator = (bodySchema: ZodType) => {
             req.body = bodySchema.parse(req.body);
             next();
         } catch (error: unknown) {
-            if(error instanceof ZodError) {
+            if (error instanceof ZodError) {
                 throw handleZodError(error);
             }
 
