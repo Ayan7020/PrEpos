@@ -1,19 +1,31 @@
 import "./container";
 import Express from "express";
-import { GlobalError, globalRateLimiterPerIp } from "./middleware";
-import { generateOpenAPIDocument } from "./config/openapi";
-import swaggerUi from "swagger-ui-express";
-// import { authRouter } from "./modules/auth";
-
-export const app = Express();
-
-
-// app.use(globalRateLimiterPerIp);
+import { GlobalError } from "./middleware";
+import { swaggerConfig } from "./shared/swagger/config";
+import { loadAllDocs } from "./shared/swagger/loaders";
+import { createSwaggerRouter } from "./shared/swagger/router";
+import authRouter from "@auth/http/auth.routes";
 
 
-// app.use("/api/auth", authRouter);
+export async function createApp() {
+    const app = Express();
 
-// const openapiDocument = generateOpenAPIDocument();
-// app.use("/docs", swaggerUi.serve, swaggerUi.setup(openapiDocument));
+    app.use(Express.json())
+    // app.use(globalRateLimiterPerIp);
 
-// app.use(GlobalError);
+    if (swaggerConfig.enabled) {
+        await loadAllDocs();
+        app.use(swaggerConfig.path, createSwaggerRouter());
+    }
+
+
+    app.use("/api/auth", authRouter);
+
+    // const openapiDocument = generateOpenAPIDocument();
+    // app.use("/docs", swaggerUi.serve, swaggerUi.setup(openapiDocument));
+
+    app.use(GlobalError);
+
+    return app
+}
+

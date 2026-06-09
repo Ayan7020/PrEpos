@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe"; 
 import { Request, Response } from "express";
-import { ApiResponse } from "@/utils/ApiResponse"; 
-import { AuthTOKENS } from "../di";
+import { ApiResponse } from "@/utils/ApiResponse";  
 import { type AuthUseCases } from "../application/AuthUseCases";
+import { TOKENS } from "@/config";
 
 const COOKIE_OPTIONS = {
   httpOnly: true,       
@@ -15,7 +15,7 @@ const COOKIE_OPTIONS = {
 @injectable()
 export class AuthController {
   constructor(
-    @inject(AuthTOKENS.AuthUseCases)
+    @inject(TOKENS.AuthUseCases)
     private readonly authUseCase: AuthUseCases,
   ) {}
 

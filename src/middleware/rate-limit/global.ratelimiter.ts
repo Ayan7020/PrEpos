@@ -1,6 +1,6 @@
 import { App_settings, BaseLogger } from "@/config";
 import { RedisClient } from "@/lib/redis";
-import { BaseError, TooManyRequestsError } from "@/utils/errors";
+import { TooManyRequestsError } from "@/utils/errors";
 import { NextFunction, Request, Response } from "express";
 import { RateLimiterRedis, RateLimiterRes } from "rate-limiter-flexible";
 

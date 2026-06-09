@@ -1,10 +1,15 @@
-import { app } from "./app";
-import { Env } from "./config";
+import { createApp } from "./app";
+import { BaseLogger, Env } from "./config";
 import { showBanner } from "./config/banner"; 
 
-app.listen(Env.PORT, () => {
-    if (Env.isDev) {
-        showBanner(Env.PORT)
-    } 
-});
 
+async function bootstrap() {
+    const app = await createApp();
+    app.listen(Env.PORT, () => {
+        if (Env.isDev) {
+            showBanner(Env.PORT)
+        } 
+    });
+}
+
+bootstrap().catch(console.error);

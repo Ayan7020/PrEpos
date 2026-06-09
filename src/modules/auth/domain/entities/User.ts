@@ -9,7 +9,7 @@ export class User {
     ) { }
 
 
-    static register(id: string, name: string, storeName: string, email: string, passwordHash: string): User {
+    static register(id: string, name: string, email: string, passwordHash: string): User {
         if (!email.includes("@")) throw new Error("Invalid email");
         if (!name.trim()) throw new Error("Name is required");
         return new User(id, name, email, passwordHash, new Date(), true);

@@ -22,7 +22,7 @@ export class RegisterUserUseCase {
     
     const passwordHash = await this.hasher.hash(dto.password);
 
-    const user = User.register(uuid(), dto.name, dto.store_name, dto.email, passwordHash); 
+    const user = User.register(uuid(), dto.name, dto.email, passwordHash); 
 
     await this.userRepo.save(user);
 

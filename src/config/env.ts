@@ -8,6 +8,7 @@ dotenv.config({
 const schema = z.object({
     PORT: z.string(),
     Environment: z.enum(["development", "production", "testing"]).default("development"),
+    HOST: z.string().default("http://localhost"),
 
     REDIS_HOST: z.string(),
     REDIS_PORT: z.string(),

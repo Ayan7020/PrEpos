@@ -5,8 +5,7 @@ import { TOKENS } from "@/config";
 
 
 
-export function registerAuthModule(container: DependencyContainer) {
-    console.log("Registeration")
+export function registerAuthModule(container: DependencyContainer) { 
     container.register(TOKENS.AuthRepository, {
         useClass: PrismaUserRepository
     }); 
