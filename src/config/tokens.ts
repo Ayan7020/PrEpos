@@ -1,5 +1,11 @@
 export const TOKENS = {
     AuthRepository: Symbol("AuthRepository"),
     AuthService: Symbol("AuthService"),
-    AuthUseCases: Symbol("AuthUseCases")
+    PasswordHasher: Symbol("PasswordHasher"),
+
+    JwtService: Symbol("JwtService"),
+    AuthUseCases: Symbol("AuthUseCases"),
+
+
+    WorkspaceQueryService: Symbol("WorkspaceQueryService")
 };  

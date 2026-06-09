@@ -3,5 +3,6 @@ export const AuthTOKENS = {
     AuthService: Symbol("AuthService"),
     PasswordHasher: Symbol("PasswordHasher"),
 
+    JwtService: Symbol("JwtService"),
     AuthUseCases: Symbol("AuthUseCases")
 };  

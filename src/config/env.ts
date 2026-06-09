@@ -11,7 +11,11 @@ const schema = z.object({
 
     REDIS_HOST: z.string(),
     REDIS_PORT: z.string(),
-    REDIS_PASSWORD: z.string()
+    REDIS_PASSWORD: z.string(),
+
+
+    AccessTokenSecret: z.string(),
+    RefreshTokenSecret: z.string()
 })
 
 const parsed = schema.parse(process.env);

@@ -18,14 +18,68 @@ model User {
   id            String @id @default(uuid())
   email         String @unique
   name          String
-  store_name    String
   password_hash String
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 
-  is_active  Boolean      @default(true)
-  userOutBox User_OutBox?
+  is_active Boolean @default(true)
+
+  workspace    workspace[]
+  userOutBox   User_OutBox?
+  refreshToken refreshToken?
+}
+
+model refreshToken {
+  id      String @id @default(uuid())
+  user_id String @unique
+
+  token     String
+  expiresAt DateTime
+  user      User     @relation(fields: [user_id], references: [id])
+}
+
+model workspace {
+  id      String @id @default(uuid())
+  user_id String
+
+  name        String
+  description String
+
+  currency     Currency      @default(INR)
+  businessType business_type
+  location     String?
+
+  user      User     @relation(fields: [user_id], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Role {
+  id          String     @id @default(uuid())
+  name        roles_enum @unique
+  description String?
+
+  createdAt        DateTime           @default(now())
+  rolesPermissions RolesPermissions[]
+}
+
+model Permission {
+  id   String @id @default(uuid())
+  name String
+
+  role_id          String
+  rolesPermissions RolesPermissions[]
+}
+
+model RolesPermissions {
+  role_id       String
+  permission_id String
+
+  role       Role       @relation(fields: [role_id], references: [id])
+  permission Permission @relation(fields: [permission_id], references: [id])
+
+  @@id([role_id, permission_id])
 }
 
 model User_OutBox {
@@ -34,6 +88,23 @@ model User_OutBox {
   status  OutBox_Status @default(Pending)
 
   user User @relation(fields: [user_id], references: [id])
+}
+
+enum roles_enum {
+  OWNER
+  MANAGER
+  CASHIER
+}
+
+enum business_type {
+  RETAIL_STORE
+  RESTAURANT
+}
+
+enum Currency {
+  INR
+  USD
+  GBP
 }
 
 enum OutBox_Status {
