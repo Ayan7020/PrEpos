@@ -1,7 +1,6 @@
 import { app } from "./app";
 import { Env } from "./config";
-import { showBanner } from "./config/banner";
-import "reflect-metadata";
+import { showBanner } from "./config/banner"; 
 
 app.listen(Env.PORT, () => {
     if (Env.isDev) {

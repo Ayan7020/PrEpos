@@ -9,7 +9,7 @@ export class PrismaUserRepository implements IUserRepository {
     const doc = await prisma.user.findFirst({ where: { email } });
     if (!doc) return null;
     return User.reconstitute(
-      doc.id, doc.name, doc.store_name, doc.email,
+      doc.id, doc.name, doc.email,
       doc.password_hash, doc.created_at, doc.is_active
     );
   }
@@ -20,8 +20,7 @@ export class PrismaUserRepository implements IUserRepository {
         where: { id: user.id },
         create: {
           id: user.id,
-          name: user.name,
-          store_name: user.storeName,
+          name: user.name, 
           email: user.email,
           password_hash: user.passwordHash,
           is_active: user.isActive,

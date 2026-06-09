@@ -5,13 +5,13 @@ import { type IPasswordHasher } from "../interfaces/IPasswordHasher";
 import { User } from "../../domain/entities/User";
 import { RegisterUserDTO, RegisterResultDTO } from "../dtos/AuthDTOs";
 import { ConflictError } from "@/utils/errors";
-import { AuthTOKENS } from "../../di";
+import { TOKENS } from "@/config";
 
 @injectable()
 export class RegisterUserUseCase {
   constructor(
-    @inject(AuthTOKENS.AuthRepository) private readonly userRepo: IUserRepository,
-    @inject(AuthTOKENS.PasswordHasher) private readonly hasher: IPasswordHasher,
+    @inject(TOKENS.AuthRepository) private readonly userRepo: IUserRepository,
+    @inject(TOKENS.PasswordHasher) private readonly hasher: IPasswordHasher,
   ) {}
 
   async execute(dto: RegisterUserDTO): Promise<RegisterResultDTO> { 

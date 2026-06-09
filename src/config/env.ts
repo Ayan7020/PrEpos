@@ -18,7 +18,7 @@ const schema = z.object({
     RefreshTokenSecret: z.string()
 })
 
-const parsed = schema.parse(process.env);
+const parsed = schema.parse(process.env);  
 
 export const Env = {
     ...parsed,

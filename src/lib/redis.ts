@@ -5,6 +5,7 @@ export const RedisClient = new Redis({
     host: Env.REDIS_HOST,
     port: Env.REDIS_PORT,
 
+    password: Env.REDIS_PASSWORD,
     maxRetriesPerRequest: App_settings.Redis.maxRetriesPerRequest,
 
     retryStrategy(times) {
