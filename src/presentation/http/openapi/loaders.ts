@@ -22,7 +22,7 @@ function findDocFiles(dir: string, ext: string): string[] {
 }
 
 export async function loadAllDocs(): Promise<void> {
-    const modulesDir = path.join(__dirname, "../../modules");
+    const modulesDir = path.join(__dirname, "../../../modules");
 
     const ext = Env.isProd ? ".docs.js" : ".docs.ts";
 

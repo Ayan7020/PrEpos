@@ -15,19 +15,19 @@ datasource db {
 }
 
 model User {
-  id            String @id @default(uuid())
-  email         String @unique
+  id            String  @id @default(uuid())
+  email         String  @unique
   name          String
   password_hash String
+  is_active     Boolean @default(true)
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 
-  is_active Boolean @default(true)
-
-  workspace    workspace[]
   userOutBox   User_OutBox?
   refreshToken refreshToken?
+
+  workspaceMember workSpaceMember[]
 }
 
 model refreshToken {
@@ -40,8 +40,7 @@ model refreshToken {
 }
 
 model workspace {
-  id      String @id @default(uuid())
-  user_id String
+  id String @id @default(uuid())
 
   name        String
   description String
@@ -50,14 +49,31 @@ model workspace {
   businessType business_type
   location     String?
 
-  user      User     @relation(fields: [user_id], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  members workSpaceMember[]
+}
+
+model workSpaceMember {
+  id           String     @id @default(uuid())
+  user_id      String
+  workspace_id String
+  role         roles_enum
+
+  is_active Boolean @default(true)
+
+  joined_at  DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user      User      @relation(fields: [user_id], references: [id])
+  workspace workspace @relation(fields: [workspace_id], references: [id])
+
+  @@unique([user_id, workspace_id])
 }
 
 model Role {
-  id          String     @id @default(uuid())
-  name        roles_enum @unique
+  name        roles_enum @id @unique
   description String?
 
   createdAt        DateTime           @default(now())
@@ -65,21 +81,19 @@ model Role {
 }
 
 model Permission {
-  id   String @id @default(uuid())
-  name String
+  name String @id @unique
 
-  role_id          String
   rolesPermissions RolesPermissions[]
 }
 
 model RolesPermissions {
-  role_id       String
-  permission_id String
+  role_name      String
+  permision_name String
 
-  role       Role       @relation(fields: [role_id], references: [id])
-  permission Permission @relation(fields: [permission_id], references: [id])
+  role       Role       @relation(fields: [role_name], references: [name])
+  permission Permission @relation(fields: [permision_name], references: [name])
 
-  @@id([role_id, permission_id])
+  @@id([role_name, permision_name])
 }
 
 model User_OutBox {
