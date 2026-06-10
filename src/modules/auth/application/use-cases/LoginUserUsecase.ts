@@ -1,18 +1,19 @@
 import { inject } from "tsyringe";
 import { LoginUserDTO } from "../dtos/AuthDTOs";
 import { type IUserRepository } from "../../domain/repositories/IUserRepository";
-import { UnauthorizedError } from "@/utils/errors";
-import { type IJwtService, type IPasswordHasher } from "../interfaces";
-import { TOKENS } from "@/config";
+import { UnauthorizedError } from "@/shared/errors";
+import { type IJwtService, type IPasswordHasher } from "../interfaces"; 
 import { type IWorkspaceQueryService } from "@/shared/interfaces";
+import { AuthTOKENS } from "../../di";
+import { SHAREDTOKENS } from "@/shared/di";
 
 export class LoginUserUseCase {
 
     constructor(
-        @inject(TOKENS.AuthRepository) private readonly userRepo: IUserRepository,
-        @inject(TOKENS.PasswordHasher) private readonly hasher: IPasswordHasher,
-        @inject(TOKENS.JwtService) private readonly jwtService: IJwtService,
-        @inject(TOKENS.WorkspaceQueryService) private readonly workSpaceQueryService: IWorkspaceQueryService
+        @inject(AuthTOKENS.AuthRepository) private readonly userRepo: IUserRepository,
+        @inject(AuthTOKENS.PasswordHasher) private readonly hasher: IPasswordHasher,
+        @inject(AuthTOKENS.JwtService) private readonly jwtService: IJwtService,
+        @inject(SHAREDTOKENS.WorkspaceQueryService) private readonly workSpaceQueryService: IWorkspaceQueryService
     ) { }
 
     async execute(dto: LoginUserDTO) {

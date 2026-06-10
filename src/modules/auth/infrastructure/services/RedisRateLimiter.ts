@@ -1,8 +1,8 @@
 import { RateLimiterRedis } from "rate-limiter-flexible";
 import { App_settings } from "@/config";
 import { IRateLimiter } from "@auth/application/interfaces";
-import { injectable } from "tsyringe";
-import { RedisClient } from "@/lib/redis";
+import { injectable } from "tsyringe"; 
+import { RedisClient } from "@/infrastructure/cache";
 
 @injectable()
 export class RedisRateLimiter implements IRateLimiter {

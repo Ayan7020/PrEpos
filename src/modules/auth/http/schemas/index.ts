@@ -1,4 +1,4 @@
-import { registry } from "@/shared/swagger";
+import { registry } from "@/presentation/http/openapi/swagger";
 
 export * from "./RegisterSchema";
 

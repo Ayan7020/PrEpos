@@ -1,6 +1,6 @@
-import { injectable } from "tsyringe";
-import { prisma } from "@/lib/prisma";
+import { injectable } from "tsyringe"; 
 import { ITokenRepository } from "../../domain/repositories/ITokenRepository";
+import { prisma } from "@/infrastructure/db";
 
 @injectable()
 export class PrismaTokenRepository implements ITokenRepository {

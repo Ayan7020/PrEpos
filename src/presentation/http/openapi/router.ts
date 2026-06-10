@@ -1,6 +1,6 @@
 import { NextFunction, Router } from "express";
 import { generateOpenAPIDocument } from "./registry";
-import { swaggerConfig } from "./config";
+import { swaggerConfig } from "../config";
 import { Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
 

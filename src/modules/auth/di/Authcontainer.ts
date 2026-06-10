@@ -1,20 +1,19 @@
 import { type DependencyContainer } from "tsyringe"; 
 import { RegisterUserUseCase } from "../application"; 
-import { BcryptPasswordHasher, PrismaUserRepository } from "../infrastructure";
-import { TOKENS } from "@/config";
-
+import { BcryptPasswordHasher, PrismaUserRepository } from "../infrastructure"; 
+import { AuthTOKENS } from "./AuthTokens";
 
 
 export function registerAuthModule(container: DependencyContainer) { 
-    container.register(TOKENS.AuthRepository, {
+    container.register(AuthTOKENS.AuthRepository, {
         useClass: PrismaUserRepository
     }); 
 
-    container.register(TOKENS.PasswordHasher, {
+    container.register(AuthTOKENS.PasswordHasher, {
         useClass: BcryptPasswordHasher
     });
 
-    container.register(TOKENS.AuthUseCases, {
+    container.register(AuthTOKENS.AuthUseCases, {
         useFactory: (c) => ({
             register: c.resolve(RegisterUserUseCase)
         })

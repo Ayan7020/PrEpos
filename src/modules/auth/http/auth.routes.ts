@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { container } from "tsyringe";
 import { AuthController } from "./auth.controller";
-import { requestSchemaValidator } from "@/middleware/validator";
+import { requestSchemaValidator } from "@/presentation/http/middleware/validator";
 import { CreateUserSchema } from "./schemas";
 
 const router = Router();  

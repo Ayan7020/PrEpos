@@ -1,4 +1,4 @@
-import { commonErrors, jsonBody, jsonResponse, registry } from "@/shared/swagger";
+import { commonErrors, jsonBody, jsonResponse, registry } from "@/presentation/http/openapi";
 import { CreateuserResponse, CreateUserSchema } from "./schemas";
 
 registry.registerPath({

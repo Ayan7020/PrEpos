@@ -1,6 +1,6 @@
 import { createApp } from "./app";
-import { BaseLogger, Env } from "./config";
-import { showBanner } from "./config/banner"; 
+import { Env } from "../config";
+import { showBanner } from "./banner";
 
 
 async function bootstrap() {
@@ -8,7 +8,7 @@ async function bootstrap() {
     app.listen(Env.PORT, () => {
         if (Env.isDev) {
             showBanner(Env.PORT)
-        } 
+        }
     });
 }
 

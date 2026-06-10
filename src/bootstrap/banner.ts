@@ -1,8 +1,8 @@
 import figlet from "figlet";
 import chalk from "chalk";
 import boxen from "boxen";
-import { Env } from "./env";
-import { App_settings } from "./settings";
+import { Env } from "@/config";
+import { App_settings } from "@/config";
 
 export function showBanner(port: number | string) {
     const title = figlet.textSync(App_settings.appName, {

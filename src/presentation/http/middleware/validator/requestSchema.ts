@@ -1,4 +1,4 @@
-import { handleZodError } from "@/utils/errors";
+import { handleZodError } from "@/shared/errors";
 import { NextFunction, Request, Response } from "express"
 import { ZodError, ZodType } from "zod"
 

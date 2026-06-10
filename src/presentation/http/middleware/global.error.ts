@@ -1,6 +1,6 @@
 import { BaseLogger } from "@/config";
-import { ApiResponse } from "@/utils/ApiResponse";
-import { BaseError } from "@/utils/errors";
+import { ApiResponse } from "@/presentation/http/helper/ApiResponse";
+import { BaseError } from "@/shared/errors";
 import { NextFunction, Request,Response } from "express";
 
 export const GlobalError = (err: Error,req: Request,res: Response,next: NextFunction) => {

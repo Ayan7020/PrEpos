@@ -1,9 +1,7 @@
 import "./container";
 import Express from "express";
-import { GlobalError } from "./middleware";
-import { swaggerConfig } from "./shared/swagger/config";
-import { loadAllDocs } from "./shared/swagger/loaders";
-import { createSwaggerRouter } from "./shared/swagger/router";
+import { GlobalError } from "@/presentation/http/middleware";
+import { swaggerConfig,loadAllDocs, createSwaggerRouter } from "@/presentation/http/openapi";  
 import authRouter from "@auth/http/auth.routes";
 
 
