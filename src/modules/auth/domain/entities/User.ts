@@ -4,24 +4,18 @@ export class User {
         public readonly name: string,
         public readonly email: string,
         public readonly passwordHash: string,
-        public readonly createdAt: Date,
-        public isActive: boolean,
+        public readonly createdAt: Date
     ) { }
 
 
     static register(id: string, name: string, email: string, passwordHash: string): User {
         if (!email.includes("@")) throw new Error("Invalid email");
         if (!name.trim()) throw new Error("Name is required");
-        return new User(id, name, email, passwordHash, new Date(), true);
+        return new User(id, name, email, passwordHash, new Date());
     }
 
-    static reconstitute(id: string, name: string, email: string, passwordHash: string, createdAt: Date, isActive: boolean): User {
-        return new User(id, name, email, passwordHash, createdAt, isActive);
+    static reconstitute(id: string, name: string, email: string, passwordHash: string, createdAt: Date): User {
+        return new User(id, name, email, passwordHash, createdAt);
     }
 
-
-    deactivate(): void {
-        if (!this.isActive) throw new Error("User already inactive");
-        this.isActive = false;
-    }
 }

@@ -10,7 +10,7 @@ export class PrismaUserRepository implements IUserRepository {
     if (!doc) return null;
     return User.reconstitute(
       doc.id, doc.name, doc.email,
-      doc.password_hash, doc.created_at, doc.is_active
+      doc.password_hash, doc.created_at
     );
   }
 
@@ -20,17 +20,18 @@ export class PrismaUserRepository implements IUserRepository {
         where: { id: user.id },
         create: {
           id: user.id,
-          name: user.name, 
+          name: user.name,
           email: user.email,
-          password_hash: user.passwordHash,
-          is_active: user.isActive,
+          password_hash: user.passwordHash
         },
-        update: { is_active: user.isActive },
-      }); 
-
-      await tx.user_OutBox.create({
-        data: { user_id: user.id, status: "Pending" }
+        update: {},
       });
+
+      // await tx.outboxEvent.create({
+      //   data: { 
+
+      //    }
+      // });
     });
   }
 }

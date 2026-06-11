@@ -1,1 +1,1 @@
-export * from "./IWorkspaceQueryService"
+export * from "./IWorkspaceQueryService";

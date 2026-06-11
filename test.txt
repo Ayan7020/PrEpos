@@ -1,0 +1,128 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String  @id @default(uuid())
+  email         String  @unique
+  name          String
+  password_hash String
+  is_active     Boolean @default(true)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  userOutBox   User_OutBox?
+  refreshToken refreshToken?
+
+  workspaceMember workSpaceMember[]
+}
+
+model refreshToken {
+  id      String @id @default(uuid())
+  user_id String @unique
+
+  token     String
+  expiresAt DateTime
+  user      User     @relation(fields: [user_id], references: [id])
+}
+
+model workspace {
+  id String @id @default(uuid())
+
+  name        String
+  description String
+
+  currency     Currency      @default(INR)
+  businessType business_type
+  location     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members workSpaceMember[]
+}
+
+model workSpaceMember {
+  id           String     @id @default(uuid())
+  user_id      String
+  workspace_id String
+  role         roles_enum
+
+  is_active Boolean @default(true)
+
+  joined_at  DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user      User      @relation(fields: [user_id], references: [id])
+  workspace workspace @relation(fields: [workspace_id], references: [id])
+
+  @@unique([user_id, workspace_id])
+}
+
+model Role {
+  name        roles_enum @id @unique
+  description String?
+
+  createdAt        DateTime           @default(now())
+  rolesPermissions RolesPermissions[]
+}
+
+model Permission {
+  name String @id @unique
+
+  rolesPermissions RolesPermissions[]
+}
+
+model RolesPermissions {
+  role_name      String
+  permision_name String
+
+  role       Role       @relation(fields: [role_name], references: [name])
+  permission Permission @relation(fields: [permision_name], references: [name])
+
+  @@id([role_name, permision_name])
+}
+
+model User_OutBox {
+  id      Int           @id @default(autoincrement())
+  user_id String        @unique
+  status  OutBox_Status @default(Pending)
+
+  user User @relation(fields: [user_id], references: [id])
+}
+
+enum roles_enum {
+  OWNER
+  MANAGER
+  CASHIER
+}
+
+enum business_type {
+  RETAIL_STORE
+  RESTAURANT
+}
+
+enum Currency {
+  INR
+  USD
+  GBP
+}
+
+enum OutBox_Status {
+  Processed
+  Failed
+  Pending
+}
