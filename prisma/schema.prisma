@@ -32,8 +32,7 @@ model workspace {
 
   name        String
   description String
-
-  currency     CURRENCY      @default(INR)
+ 
   businessType BUSSINESSTYPE
   location     String?
 
@@ -115,12 +114,7 @@ model OutboxEvent {
   createdAt   DateTime  @default(now())
   processedAt DateTime?
 }
-
-enum CURRENCY {
-  INR
-  GDP
-  USD
-}
+ 
 
 enum BUSSINESSTYPE {
   RETAIL_STORE

@@ -1,12 +1,12 @@
 import { inject, injectable } from "tsyringe";
 import { LoginUserDTO } from "../dtos/AuthDTOs";
-import { type IUserRepository } from "../../domain/repositories/IUserRepository";
-import { UnauthorizedError } from "@/shared/errors";
-import { type IJwtService, type IPasswordHasher } from "../interfaces"; 
-// import { type IWorkspaceQueryService } from "@/shared/interfaces";
-import { AuthTOKENS } from "../../di";
-import { Inject } from "tsoa";
-// import { SHAREDTOKENS } from "@/shared/di";
+import { type IUserRepository } from "../../domain/repositories";
+import { UnauthorizedError } from "@/shared/errors";  
+import { AuthTOKENS } from "../../di"; 
+import { OwnerAccessTokenPayload } from "../../types"; 
+import { type IPasswordHasher } from "../interfaces";
+import { type IJwtService } from "@/shared/interfaces";
+import { SHAREDTOKENS } from "@/shared/di";
 
 @injectable()
 export class LoginUserUseCase {
@@ -14,8 +14,7 @@ export class LoginUserUseCase {
     constructor(
         @inject(AuthTOKENS.AuthRepository) private readonly userRepo: IUserRepository,
         @inject(AuthTOKENS.PasswordHasher) private readonly hasher: IPasswordHasher,
-        @inject(AuthTOKENS.JwtService) private readonly jwtService: IJwtService,
-        // @inject(SHAREDTOKENS.WorkspaceQueryService) private readonly workSpaceQueryService: IWorkspaceQueryService
+        @inject(SHAREDTOKENS.JwtService) private readonly jwtService: IJwtService
     ) { }
 
     async execute(dto: LoginUserDTO) {
@@ -25,11 +24,11 @@ export class LoginUserUseCase {
         const ispasswordMatch = await this.hasher.compare(dto.password, user.passwordHash);
         if (!ispasswordMatch) throw new UnauthorizedError("Invalid Credential");
 
-        // const workspace_membership = await this.workSpaceQueryService.getMembershipsByUserId(user.id);
 
-        const access_token = this.jwtService.signAccessToken({
+        const access_token = this.jwtService.signAccessToken<OwnerAccessTokenPayload>({
             userId: user.id,
-            workspaces: []
+            email: user.email,
+            type: "OWNER",
         });
 
         const refresh_token = this.jwtService.signRefreshToken({

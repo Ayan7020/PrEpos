@@ -1,4 +1,3 @@
-export const SHAREDTOKENS = {
-    WorkspaceQueryService: Symbol("WorkspaceQueryService")
-
+export const SHAREDTOKENS = { 
+    JwtService: Symbol("JwtService")
 } as const;

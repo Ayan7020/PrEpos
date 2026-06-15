@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
-import { AccessTokenPayload, IJwtService } from "../../application/interfaces";
+import jwt from "jsonwebtoken"; 
 import { App_settings, Env } from "@/config";
+import { IJwtService } from "../interfaces";
 
 export class JwtService implements IJwtService {
-    signAccessToken(payload: AccessTokenPayload): string {
+    signAccessToken<T extends Object>(payload: T): string {
         return jwt.sign(payload, Env.AccessTokenSecret, {
             expiresIn: `${App_settings.Auth.access_token_life_minutes}m`
         })
@@ -14,9 +14,9 @@ export class JwtService implements IJwtService {
         });
 
     }
-    verifyAccessToken(token: string): AccessTokenPayload | null {
+    verifyAccessToken<T extends Object>(token: string): T | null {
         try {
-            return jwt.verify(token, Env.AccessTokenSecret) as AccessTokenPayload;
+            return jwt.verify(token, Env.AccessTokenSecret) as T;
         } catch {
             return null;
         }
