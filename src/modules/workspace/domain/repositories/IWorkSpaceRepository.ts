@@ -1,5 +1,6 @@
-import { WorkSpaceMember } from "../entities";
+import { WorkSpace } from "../entities";
 
 export interface IWorkSpaceRepository {
-    findAllByUserId(user_id: string): Promise<WorkSpaceMember[]>
+    save(data: WorkSpace): Promise<void>
+
 }

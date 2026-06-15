@@ -3,13 +3,11 @@ import { Permission, Role } from "@/shared/types";
 export class WorkSpaceMember {
     private constructor(
         public readonly id: string,
-        public readonly user_id: string,
-        public readonly workspace_id: string,
-        public role: Role,
-
-        public permissions: Permission[],
-        public isActive: boolean,
-        public readonly joinedAt: Date,
+        public readonly name: string,
+        public readonly email: string,
+        
+        public readonly password_hash: string,
+        
     ) { }
 
 
