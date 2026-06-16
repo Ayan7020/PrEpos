@@ -3,6 +3,7 @@ import Express from "express";
 import { GlobalError } from "@/presentation/http/middleware";
 import { swaggerConfig,loadAllDocs, createSwaggerRouter } from "@/presentation/http/openapi";  
 import authRouter from "@auth/http/auth.routes";
+import workspaceRouter from "@workspace/http/workspace.route";
 
 
 export async function createApp() {
@@ -18,9 +19,8 @@ export async function createApp() {
 
 
     app.use("/api/auth", authRouter);
-
-    // const openapiDocument = generateOpenAPIDocument();
-    // app.use("/docs", swaggerUi.serve, swaggerUi.setup(openapiDocument));
+    app.use("/api/workspace", workspaceRouter);
+ 
 
     app.use(GlobalError);
 

@@ -56,7 +56,8 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
-      "@auth/*": ["./modules/auth/*"]
+      "@auth/*": ["./modules/auth/*"],
+      "@workspace/*": ["./modules/workspace/*"]
     }
   },
 

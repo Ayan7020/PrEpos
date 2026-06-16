@@ -1,4 +1,4 @@
-import { WorkSpaceMember } from "./WorkspaceMember";
+import { WorkspaceMember } from "./WorkspaceMember";
 
 export class WorkSpace {
     private constructor(
@@ -13,10 +13,10 @@ export class WorkSpace {
 
         public readonly owner_id: string,
 
-        public members: WorkSpaceMember[]
+        public members: WorkspaceMember[]
     ) { }
  
-    static create(
+    static register(
         id: string,
         name: string,
         description: string,
@@ -36,7 +36,7 @@ export class WorkSpace {
         createdAt: Date,
         updatedAt: Date,
         owner_id: string,
-        members: WorkSpaceMember[]
+        members: WorkspaceMember[]
     ): WorkSpace {
         return new WorkSpace(id,name,description,businessType,location,createdAt,updatedAt,owner_id,members);
     }

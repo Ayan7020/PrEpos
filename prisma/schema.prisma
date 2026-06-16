@@ -32,7 +32,7 @@ model workspace {
 
   name        String
   description String
- 
+
   businessType BUSSINESSTYPE
   location     String?
 
@@ -52,7 +52,7 @@ model WorkspaceMember {
   name          String
   email         String
   password_hash String
-  role          ROLES
+  role_id       String
 
   is_active Boolean @default(true)
 
@@ -60,6 +60,7 @@ model WorkspaceMember {
   updated_at DateTime @updatedAt
 
   workspace workspace @relation(fields: [workspace_id], references: [id])
+  role      Role      @relation(fields: [role_id], references: [id])
 
   @@unique([workspace_id, email])
 }
@@ -80,6 +81,7 @@ model Role {
   description String?
 
   rolesPermissions RolesPermissions[]
+  workspaceMembers WorkspaceMember[]
 }
 
 model Permission {
@@ -114,7 +116,6 @@ model OutboxEvent {
   createdAt   DateTime  @default(now())
   processedAt DateTime?
 }
- 
 
 enum BUSSINESSTYPE {
   RETAIL_STORE
