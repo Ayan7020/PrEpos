@@ -5,7 +5,7 @@ import { type IPasswordHasher } from "../interfaces/IPasswordHasher";
 import { User } from "../../domain/entities/User";
 import { RegisterUserDTO, RegisterResultDTO } from "../dtos/AuthDTOs";
 import { ConflictError } from "@/shared/errors"; 
-import { AuthTOKENS } from "../../di";
+import { AuthTOKENS } from "../../di"; 
 
 @injectable()
 export class RegisterUserUseCase {

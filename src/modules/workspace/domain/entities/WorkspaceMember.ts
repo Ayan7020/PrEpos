@@ -1,3 +1,4 @@
+import { ROLES } from "@/generated/prisma/enums";
 import { Permission, Role } from "@/shared/types";
 
 export class WorkSpaceMember {
@@ -5,7 +6,9 @@ export class WorkSpaceMember {
         public readonly id: string,
         public readonly name: string,
         public readonly email: string,
-        
+        public readonly role: ROLES,
+
+        public readonly created_at: Date,
         public readonly password_hash: string,
         
     ) { }

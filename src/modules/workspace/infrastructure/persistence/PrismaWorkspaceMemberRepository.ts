@@ -10,7 +10,12 @@ export class PrismaWorkspaceMemberRepository implements IWorkspaceMemberReposito
             await prisma.workspaceMember.upsert({
                 where: { id: d.id},
                 create: {
-                    email: d.
+                    name: d.name,
+                    email: d.email,
+                    password_hash: d.password_hash,
+                    role: d.role,
+                    created_at: d.created_at,
+                    
                 }
             })
         })
