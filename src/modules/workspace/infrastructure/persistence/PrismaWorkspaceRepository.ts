@@ -5,7 +5,7 @@ import { IWorkSpaceRepository } from "../../domain/repositories";
 
 export class PrismaWorkspaceRepository implements IWorkSpaceRepository {
     async save(data: WorkSpace): Promise<void> {
-        prisma.workspace.upsert({
+        await prisma.workspace.upsert({
             where: { id: data.id },
             create: {
                 id: data.id,
@@ -15,18 +15,13 @@ export class PrismaWorkspaceRepository implements IWorkSpaceRepository {
                 createdAt: data.createdAt,
                 updatedAt: data.updatedAt,
                 owner_id: data.owner_id, 
-                businessType: "RESTAURANT"
+                businessType: data.businessType
             },
-            update: {
-                id: data.id,
+            update: { 
                 name: data.name,
                 description: data.description,
-                location: data.location,
-                createdAt: data.createdAt,
-                updatedAt: data.updatedAt,
-                owner_id: data.owner_id, 
-                // businessType: data.businessType, 
+                location: data.location,  
             }
-        })
+        });
     }
 }

@@ -1,3 +1,4 @@
+import { businessType } from "@/shared/types";
 import { WorkspaceMember } from "./WorkspaceMember";
 
 export class WorkSpace {
@@ -5,7 +6,7 @@ export class WorkSpace {
         public readonly id: string,
         public readonly name: string,
         public readonly description: string,
-        public readonly businessType: string,
+        public readonly businessType: businessType,
         public readonly location: string,
 
         public readonly createdAt: Date,
@@ -20,7 +21,7 @@ export class WorkSpace {
         id: string,
         name: string,
         description: string,
-        businessType: string,
+        businessType: businessType,
         location: string, 
         owner_id: string
     ): WorkSpace {
@@ -31,7 +32,7 @@ export class WorkSpace {
         id: string,
         name: string,
         description: string,
-        businessType: string,
+        businessType: businessType,
         location: string,
         createdAt: Date,
         updatedAt: Date,

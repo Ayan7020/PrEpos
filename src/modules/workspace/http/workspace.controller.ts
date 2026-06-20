@@ -11,12 +11,20 @@ export class WorkspaceController {
         @inject(workspaceToken.WorkspaceUsecase) private readonly workspaceUseCase: WorkspaceUseCase,
     ) { }
 
-    createWorkspace = async (req: Request, res: Response) => { 
+    createWorkspace = async (req: Request, res: Response) => {
         const result = await this.workspaceUseCase.create.execute({
             ...req.body,
             owner_id: (req as any).userId,
         });
         return ApiResponse.success(res, result, "workspace created successfully", 201);
     };
+
+    addWorkspaceMember = async (req: Request, res: Response) => {
+        await this.workspaceUseCase.members.add.execute({
+            ...req.body,
+            owner_id: (req as any).userId,
+        });
+        return ApiResponse.success(res, {}, "Member added succesfully", 201);
+    }
 
 }

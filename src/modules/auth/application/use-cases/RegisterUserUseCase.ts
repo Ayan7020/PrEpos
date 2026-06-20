@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { inject, injectable } from "tsyringe"; 
 import { type IUserRepository } from "../../domain/repositories/IUserRepository";
-import { type IPasswordHasher } from "../interfaces/IPasswordHasher";
+import { type IPasswordHasher } from "../../../../shared/interfaces/IPasswordHasher";
 import { User } from "../../domain/entities/User";
 import { RegisterUserDTO, RegisterResultDTO } from "../dtos/AuthDTOs";
 import { ConflictError } from "@/shared/errors"; 

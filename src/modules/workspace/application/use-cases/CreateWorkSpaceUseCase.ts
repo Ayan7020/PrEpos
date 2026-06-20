@@ -1,4 +1,4 @@
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 import { workspaceToken } from "../../di";
 import { type IWorkSpaceRepository } from "../../domain/repositories";
 import { WorkSpace } from "../../domain/entities";
@@ -6,6 +6,7 @@ import { CreateWorkspaceDto, CreateWorkspaceResultDto } from "../dto/WorkspaceDt
 import { v4 as uuid } from "uuid"
 import { BadRequestError } from "@/shared/errors";
 
+@injectable()
 export class CreateWorkSpaceUseCase {
     constructor(
         @inject(workspaceToken.workSpaceRepo) private readonly workspaceRepo: IWorkSpaceRepository

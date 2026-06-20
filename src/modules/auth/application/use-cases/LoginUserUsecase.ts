@@ -2,11 +2,11 @@ import { inject, injectable } from "tsyringe";
 import { LoginUserDTO } from "../dtos/AuthDTOs";
 import { type IUserRepository } from "../../domain/repositories";
 import { UnauthorizedError } from "@/shared/errors";  
-import { AuthTOKENS } from "../../di"; 
-import { OwnerAccessTokenPayload } from "../../types"; 
+import { AuthTOKENS } from "../../di";  
 import { type IPasswordHasher } from "../interfaces";
 import { type IJwtService } from "@/shared/interfaces";
 import { SHAREDTOKENS } from "@/shared/di";
+import { AccessTokenPayload } from "@/shared/types";
 
 @injectable()
 export class LoginUserUseCase {
@@ -25,7 +25,7 @@ export class LoginUserUseCase {
         if (!ispasswordMatch) throw new UnauthorizedError("Invalid Credential");
 
 
-        const access_token = this.jwtService.signAccessToken<OwnerAccessTokenPayload>({
+        const access_token = this.jwtService.signAccessToken<AccessTokenPayload>({
             userId: user.id,
             email: user.email,
             type: "OWNER",
