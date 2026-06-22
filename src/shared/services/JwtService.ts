@@ -15,9 +15,10 @@ export class JwtService implements IJwtService {
 
     }
     verifyAccessToken<T extends Object>(token: string): T | null {
-        try {
-            return jwt.verify(token, Env.AccessTokenSecret) as T;
-        } catch {
+        try {  
+            return jwt.verify(token.trim(), Env.AccessTokenSecret) as T;
+        } catch (error) {
+            console.log(error)
             return null;
         }
     }

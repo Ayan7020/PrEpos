@@ -1,5 +1,5 @@
 import { commonErrors, jsonBody, jsonResponse, registry } from "@/presentation/http/openapi";
-import { CreateWorkspaceSchema } from "./schemas";
+import { CreateWorkspaceSchema, LoginWorkspaceMemberSchema } from "./schemas";
 import z from "zod";
 
 registry.registerPath({
@@ -18,10 +18,13 @@ registry.registerPath({
 
 registry.registerPath({
     method: "post",
-    path: "/workspace/add-workspace-member",
+    path: "/workspace/{workspace_id}/add-workspace-member",
     tags: ["Workspace"],
     summary: "Add a member to the workspace",
     request: {
+        params: z.object({
+            workspace_id: z.string(),
+        }),
         body: jsonBody(CreateWorkspaceSchema),
     },
     responses: {
@@ -39,7 +42,7 @@ registry.registerPath({
         params: z.object({
             workspace_id: z.string(),
         }),
-        body: jsonBody(CreateWorkspaceSchema),
+        body: jsonBody(LoginWorkspaceMemberSchema),
     },
     responses: {
         200: jsonResponse(CreateWorkspaceSchema, "User registered"),

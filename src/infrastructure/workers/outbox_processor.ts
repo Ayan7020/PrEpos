@@ -1,10 +1,9 @@
-import { prisma } from "@/lib/prisma";
-
+import { prisma } from "@/infrastructure/db";
 
 async function processOutbox() {
-    const user_events = await prisma.user_OutBox.findMany({
+    const user_events = await prisma.outboxEvent.findMany({
         where: {
-            status: "Pending"
+            status: "PENDING"
         },
         take: 10
     });

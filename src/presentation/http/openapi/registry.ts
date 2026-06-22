@@ -2,6 +2,12 @@ import { Env } from "@/config";
 import { OpenAPIRegistry, OpenApiGeneratorV3 } from "@asteasolutions/zod-to-openapi";
 
 export const registry = new OpenAPIRegistry();
+ 
+registry.registerComponent("securitySchemes", "BearerAuth", {
+    type: "http",
+    scheme: "bearer",
+    bearerFormat: "JWT",
+});
 
 export function generateOpenAPIDocument() {
     const generator = new OpenApiGeneratorV3(registry.definitions);
@@ -24,6 +30,12 @@ export function generateOpenAPIDocument() {
         tags: [
             { name: "Auth", description: "Authentication endpoints" },
             { name: "Workspace", description: "Workspace management" },
+        ],
+
+        security: [
+            {
+                BearerAuth: [],
+            }
         ],
     })
 }

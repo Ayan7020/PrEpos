@@ -10,7 +10,7 @@ const router = Router();
 const controller = container.resolve(WorkspaceController);
 
 router.post("/create-workspace", isWorkspaceOwner, requestSchemaValidator(CreateWorkspaceSchema), controller.createWorkspace);
-router.post("/add-workspace-member", permissionValidator("ADD_WORKSPACE_MEMBER"),requestSchemaValidator(AddWorkspaceMemberSchema), controller.addWorkspaceMember);
+router.post("/:workspace_id/add-workspace-member", isWorkspaceOwner,requestSchemaValidator(AddWorkspaceMemberSchema), controller.addWorkspaceMember);
 router.post("/:workspace_id/login",requestSchemaValidator(LoginWorkspaceMemberSchema), controller.LoginWorkspace);
 
 

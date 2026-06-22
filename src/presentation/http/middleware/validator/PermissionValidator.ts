@@ -12,7 +12,7 @@ export const permissionValidator = (requiredPermission: Permissions) => {
             (req as any).tokenPayload  = payload;
         }
 
-        if(tokenPayload.permissions !== requiredPermission) {
+        if(!tokenPayload.permissions.includes(requiredPermission)) {
             throw new ForbiddenError("You do not have the authority for this resources.")
         } 
         next();

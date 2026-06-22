@@ -14,5 +14,5 @@ export type WorkspaceMemberAccessTokenPayload = {
     type: ROLES,
     member_id: string,
     role_id: string,
-    permissions: Permissions
+    permissions: Permissions[]
 }

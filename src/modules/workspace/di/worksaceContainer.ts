@@ -5,6 +5,7 @@ import { WorkspaceUseCase } from "../application/workspaceUseCases";
 import { CreateWorkSpaceUseCase } from "../application/use-cases";
 import { PrismaWorkspaceMemberRepository } from "../infrastructure/persistence/PrismaWorkspaceMemberRepository";
 import { AddWorkSpaceMemberUseCase } from "../application/use-cases/AddWorkSpaceMemberUseCase";
+import { LoginWorkspaceMemberUseCase } from "../application/use-cases/LoginWorkspaceMemberUseCase";
 
 export function registerWorkspaceModule(container: DependencyContainer) {
     container.register(workspaceToken.workSpaceRepo, {
@@ -18,6 +19,7 @@ export function registerWorkspaceModule(container: DependencyContainer) {
     container.register<WorkspaceUseCase>(workspaceToken.WorkspaceUsecase, {
         useFactory: (c) => ({ 
             create: c.resolve(CreateWorkSpaceUseCase),
+            login: c.resolve(LoginWorkspaceMemberUseCase),
             members: {
                 add: c.resolve(AddWorkSpaceMemberUseCase)
             }

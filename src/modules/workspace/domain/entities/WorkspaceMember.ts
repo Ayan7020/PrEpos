@@ -1,3 +1,6 @@
+import { ROLES } from "@/generated/prisma/enums";
+import { Permissions } from "@/shared/types";
+
 export class WorkspaceMember {
   private constructor(
     public readonly id: string,
@@ -8,6 +11,8 @@ export class WorkspaceMember {
     public roleId: string,               
     public isActive: boolean,
     public readonly createdAt: Date,
+    public readonly role?: ROLES,
+    public readonly permissions?: Permissions[]
   ) {}
 
   static create(
@@ -32,8 +37,10 @@ export class WorkspaceMember {
     roleId: string,
     isActive: boolean,
     createdAt: Date,
+    role?: ROLES,
+    permissions?: Permissions[]
   ): WorkspaceMember {
-    return new WorkspaceMember(id, workspaceId, name, email, passwordHash, roleId, isActive, createdAt);
+    return new WorkspaceMember(id, workspaceId, name, email, passwordHash, roleId, isActive, createdAt, role, permissions);
   }
 
   changeRole(newRoleId: string): void {

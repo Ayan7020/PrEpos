@@ -15,8 +15,8 @@ export const validateToken = <T extends Object>(token?: string): T  => {
         throw new UnauthorizedError("Invalid Token Format!")
     }
 
-    const jwtService = container.resolve<IJwtService>(SHAREDTOKENS.JwtService);
-    const veiryToken = jwtService.verifyAccessToken<T>(tokenWithoutBearer);
+    const jwtService = container.resolve<IJwtService>(SHAREDTOKENS.JwtService); 
+    const veiryToken = jwtService.verifyAccessToken<T>(tokenWithoutBearer); 
     if(!veiryToken) {
         throw new UnauthorizedError("Failed to validate the Token")
     }
