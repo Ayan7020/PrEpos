@@ -27,4 +27,12 @@ export class WorkspaceController {
         return ApiResponse.success(res, {}, "Member added succesfully", 201);
     }
 
+    LoginWorkspace = async (req: Request, res: Response) => {
+        await this.workspaceUseCase.login.execute({
+            ...req.body, 
+            workspace_id: (req as any).workspace_id
+        });
+        return ApiResponse.success(res, {}, "Login successful", 200);
+    }
+
 }

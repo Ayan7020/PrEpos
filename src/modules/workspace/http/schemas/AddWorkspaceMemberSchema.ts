@@ -6,5 +6,5 @@ export const AddWorkspaceMemberSchema = z.object({
     email: z.email(),
 
     password: z.string(), 
-    role: z.enum(["Manager","Cashier"])
+    role_id: z.string()
 });

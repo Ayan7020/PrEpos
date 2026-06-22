@@ -2,8 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { AddWorkspaceMemberDto } from "../dto/WorkspaceMemberDto";
 import { BadRequestError } from "@/shared/errors";
 import { WorkspaceMember } from "../../domain/entities";
-import { v4 as uuid } from "uuid";
-import { ROLES } from "@/shared/authorization";
+import { v4 as uuid } from "uuid"; 
 import { SHAREDTOKENS } from "@/shared/di";
 import { type IPasswordHasher } from "@/shared/interfaces";
 import { workspaceToken } from "../../di";
@@ -28,7 +27,7 @@ export class AddWorkSpaceMemberUseCase {
             dto.name,
             dto.email,
             password_hash,
-            "ss"
+            dto.role_id
         );
         
         await this.workspaceMemberRepo.save(workspaceMember);
