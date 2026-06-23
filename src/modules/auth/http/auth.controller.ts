@@ -26,11 +26,11 @@ export class AuthController {
 
   loginUser = async (req: Request,res: Response) => {
     const result = await this.authUseCase.login.execute(req.body);
-    
+
+    res.cookie("accessToken",result.access_token, COOKIE_OPTIONS);
     res.cookie("refreshToken",result.refresh_token, COOKIE_OPTIONS);
 
     return ApiResponse.success(res,{
-      accessToken: result.access_token,
       user: result.user
     },"Login Successful")
   }

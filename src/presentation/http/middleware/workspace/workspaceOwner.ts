@@ -7,7 +7,8 @@ export const isWorkspaceOwner = (req: Request, res: Response, next: NextFunction
 
     let tokenPayload = (req as any).tokenPayload as AccessTokenPayload | null;
     if (!tokenPayload) {
-        const payload = validateToken<AccessTokenPayload>(req.headers.authorization)
+        console.log(req.cookies)
+        const payload = validateToken<AccessTokenPayload>(req.cookies["accessToken"])
         tokenPayload = payload;
         (req as any).tokenPayload = payload;
     } 

@@ -3,8 +3,7 @@ import { container } from "tsyringe";
 import { requestSchemaValidator } from "@/presentation/http/middleware/validator";
 import { WorkspaceController } from "./workspace.controller";
 import { AddWorkspaceMemberSchema, CreateWorkspaceSchema, LoginWorkspaceMemberSchema } from "./schemas";
-import { isWorkspaceOwner } from "@/presentation/http/middleware/workspace";
-import { permissionValidator } from "@/presentation/http/middleware/validator/PermissionValidator";
+import { isWorkspaceOwner } from "@/presentation/http/middleware/workspace"; 
 
 const router = Router();
 const controller = container.resolve(WorkspaceController);

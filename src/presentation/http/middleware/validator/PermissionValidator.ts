@@ -7,7 +7,7 @@ export const permissionValidator = (requiredPermission: Permissions) => {
     return (req: Request, res: Response, next: NextFunction) => {
         let tokenPayload = (req as any).tokenPayload as WorkspaceMemberAccessTokenPayload | null;
         if(!tokenPayload) {
-            const payload = validateToken<WorkspaceMemberAccessTokenPayload>(req.headers.authorization) 
+            const payload = validateToken<WorkspaceMemberAccessTokenPayload>(req.cookies["access_token"]) 
             tokenPayload = payload;
             (req as any).tokenPayload  = payload;
         }

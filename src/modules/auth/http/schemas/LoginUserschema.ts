@@ -11,8 +11,7 @@ export const LoginUserSchema = z.object({
 export const LoginUserResponse = z.object({
     success: z.boolean().openapi({ example: true }),
     message: z.string().openapi({ example: "Login Successful" }),
-    data: z.object({
-        accessToken: z.string().openapi({ example: "isedhfgiohf8d3432c" }),
+    data: z.object({ 
         user: z.object({
             id: z.string().openapi({ example: "53454546" }),
             email: z.email().openapi({ example: "test@gmail.com" }),
